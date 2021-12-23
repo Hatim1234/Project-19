@@ -85,8 +85,8 @@ function draw(){
         }
 
         //make the kid jump when space key is pressed
-        if (keyDown("space") && kid.y >= 100){
-            kid.velocityY = -9;
+        if (keyDown("space") && kid.y >= 135){
+            kid.velocityY = -11;
             jumpSound.play();
         }
 
@@ -105,7 +105,8 @@ function draw(){
         spawnFruits();
 
         if(fruitsGroup.isTouching(kid)){
-            score = score + 1;
+            fruitsGroup.destroyEach();
+            score = score + 10;
         }
     }
 
@@ -117,11 +118,9 @@ function draw(){
         kid.velocityY = 0
         kid.visible = false;
 
-        virusGroup.setLifetimeEach(-1);
-        fruitsGroup.setLifetimeEach(-1);
+        fruitsGroup.destroyEach();
+        virusGroup.destroyEach();
 
-        virusGroup.setVelocityXEach(0);
-        fruitsGroup.setVelocityXEach(0);
     }
     
     //stop kid from falling down
@@ -156,7 +155,7 @@ function spawnFruits(){
     if (frameCount % 60 === 0){
         var health = createSprite(350,140,30,30);
         health.velocityX = -5;
-        health.y = Math.round(random(60,130));
+        health.y = Math.round(random(80,100));
 
         //generate random healthy fruits
         var rand_fruit = Math.round(random(1,4));
